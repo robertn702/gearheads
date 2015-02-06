@@ -5,8 +5,10 @@ var methodOverride = require('method-override');
 var mongoose = require('mongoose');
 
 require('dotenv').load();
-
-app.use(bodyParser());          // pull information from html in POST
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(bodyParser.json());
 app.use(methodOverride());      // simulate DELETE and PUT
 
 mongoose.connect(process.env.DATABASE_URL);
