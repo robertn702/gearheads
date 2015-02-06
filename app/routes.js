@@ -13,9 +13,19 @@ module.exports = function(app) {
     AWS.execute('ItemSearch',
       {
         'SearchIndex': 'MusicalInstruments',
-        'Keywords': 'harry potter'
+        'Keywords': 'martin d35'
       }, function(err, results) {
-        console.log(results);
+        if (err) {
+          console.log(err);
+        } else {
+          console.log('Results: ', results);
+          console.log('Items: ', results.ItemSearchResponse.Items);
+          console.log('Items[0]: ', results.ItemSearchResponse.Items[0]);
+          console.log('Items[0][0]: ', results.ItemSearchResponse.Items[0].Item[0]);
+          res.json(results.ItemSearchResponse.Items[0]);
+          // if ()
+          // console.log('Errors: ', results.ItemSearchResponse.Items[0].Request[0].Errors[0].Error);
+        }
       })
   });
 
