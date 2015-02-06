@@ -10,13 +10,14 @@ module.exports = function(app) {
 
   // API Details: http://docs.aws.amazon.com/AWSECommerceService/latest/DG/ItemSearch.html
   app.get('/search', function(req, res) {
+    console.log(req);
     AWS.execute('ItemSearch',
       {
         'SearchIndex': 'MusicalInstruments',
         'Keywords': 'martin d35'
       }, function(err, results) {
         if (err) {
-          console.log(err);
+          throw (err);
         } else {
           console.log('Results: ', results);
           console.log('Items: ', results.ItemSearchResponse.Items);
