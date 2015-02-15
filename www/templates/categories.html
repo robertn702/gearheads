@@ -1,16 +1,16 @@
-<ion-view view-title="Search">
+<ion-view view-title="Categories">
   <ion-content>
     <ion-list>
       <div class="item item-input-inset">
         <label class="item-input-wrapper">
           <input type="text" placeholder="Gear">
         </label>
-        <button class="button button-small">
+        <button class="button button-small" ng-click="post()">
           Submit
         </button>
       </div>
-      <ion-item ng-repeat="item in items.Item" ng-href="#/app/item/{{item.ASIN[0]}}">
-        {{item.ItemAttributes[0].Title[0]}}
+      <ion-item ng-repeat="category in categories.categories" ng-href="">
+        {{category.searchIndex}}
       </ion-item>
     </ion-list>
   </ion-content>

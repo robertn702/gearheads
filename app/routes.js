@@ -1,33 +1,74 @@
 // load necessary models here
-var AWS = require('./amazonAPI')
+var AWS = require('./amazonAPI');
+
+// MongoDB Models
+var Categories = require('./models/Categories');
+var Comments = require('./models/Comments');
+var Feed = require('./models/Feed');
+var Items = require('./models/Items');
+var Users = require('./models/Users');
+
 
 module.exports = function(app) {
-  // app.get('/', function(req, res) {
-  //   res.render(__dirname + '/index.html'); // load our client/index.html file
-  // });
-
-  // app.get('/business', function(req, res) {});
-
   // API Details: http://docs.aws.amazon.com/AWSECommerceService/latest/DG/ItemSearch.html
   app.get('/search', function(req, res) {
-    console.log(req);
+    console.log('url: ', req.url);
+    console.log('query: ', req.query);
+    console.log('body: ', req.body);
     AWS.execute('ItemSearch',
       {
         'SearchIndex': 'MusicalInstruments',
-        'Keywords': 'martin d35'
+        'Keywords': 'macbook pro'
       }, function(err, results) {
         if (err) {
           throw (err);
         } else {
-          console.log('Results: ', results);
-          console.log('Items: ', results.ItemSearchResponse.Items);
-          console.log('Items[0]: ', results.ItemSearchResponse.Items[0]);
-          console.log('Items[0][0]: ', results.ItemSearchResponse.Items[0].Item[0]);
           res.json(results.ItemSearchResponse.Items[0]);
-          // if ()
-          // console.log('Errors: ', results.ItemSearchResponse.Items[0].Request[0].Errors[0].Error);
         }
       })
   });
+
+  app.get('/lookup/:ASIN', function(req, res) {
+    AWS.execute('ItemLookup',
+      {
+        'ItemId': req.params.ASIN,
+        'ResponseGroup': 'Small,EditorialReview,Images'
+      }, function(err, results) {
+        if (err) {
+          throw (err);
+        } else {
+          res.json(results.ItemLookupResponse.Items[0])
+        }
+      })
+  });
+
+  app.get('/categories', function(req, res) {
+    Categories.findOne({SearchIndex: "All"}, function(err, category) {
+      console.log('category: ', category);
+    });
+    Categories.find(function(err, categories) {
+      if (err) {
+        throw (err);
+      } else {
+        // console.log('parsed JSON: ', JSON(categories));
+        console.log('categories: ', {categories: categories});
+        res.json({categories: categories});
+        res.status(200);
+      }
+    });
+  });
+
+  // app.post('/categories', function(req, res) {
+  //   new Categories({
+  //     searchIndex: "testSearchIndex",
+  //     subCategories: "testSubCategory"
+  //   }).save(function(err, category) {
+  //     if (err) {
+  //       throw (err)
+  //     } else {
+  //       console.log('saved category in DB');
+  //     }
+  //   })
+  // });
 
 }

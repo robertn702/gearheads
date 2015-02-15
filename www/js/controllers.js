@@ -33,16 +33,44 @@ angular.module('gearheads.controllers', [])
   };
 })
 
-.controller('PlaylistsCtrl', function($scope) {
-  $scope.playlists = [
-    { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
-  ];
+/// EXAMPLE: ng-resource usage
+/*
+var User = $resource('/user/:userId', {userId:'@id'});
+var user = User.get({userId:123}, function() {
+  user.abc = true;
+  user.$save();
+});
+*/
+
+.controller('SearchCtrl', function($scope, $location, Search) {
+  console.log($location.absUrl());
+  console.log(Search.get());
+  $scope.items = Search.get();
 })
 
-.controller('PlaylistCtrl', function($scope, $stateParams) {
-});
+.controller('ItemCtrl', function($scope, $stateParams, Lookup) {
+  $scope.item = Lookup.get({ASIN: $stateParams.ASIN});
+  console.log($scope.item);
+})
+
+.controller('CategoriesCtrl', function($scope, $stateParams, Categories) {
+  $scope.categories = Categories.get();
+  console.log($scope.categories);
+})
+
+.controller('FeedCtrl', function($scope) {
+
+})
+
+.controller('ItemsCtrl', function($scope) {
+
+})
+
+.controller('ProfileCtrl', function($scope) {
+
+})
+
+.controller('FriendsCtrl', function($scope) {
+
+})
+

@@ -1,0 +1,15 @@
+there should only be 1 instance of each item
+
+what should the required input fields be to search?
+  - just keyword?
+  - manufacturer?
+  - model?
+  - combination of both?
+
+TO-DO: build out tree
+
+categories > more specific category > manufacturer > model
+
+TO-DO: decide on most opportune area
+
+once found, the item should be stored in the DB

@@ -4,7 +4,7 @@
 // 'gearheads' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'gearheads.controllers' is found in controllers.js
-angular.module('gearheads', ['ionic', 'gearheads.controllers'])
+angular.module('gearheads', ['ionic', 'gearheads.controllers', 'gearheads.services'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -33,8 +33,8 @@ angular.module('gearheads', ['ionic', 'gearheads.controllers'])
     url: "/search",
     views: {
       'menuContent': {
-        templateUrl: "templates/search.html"
-        // controller:
+        templateUrl: "templates/search.html",
+        controller: "SearchCtrl"
       }
     }
   })
@@ -42,8 +42,8 @@ angular.module('gearheads', ['ionic', 'gearheads.controllers'])
     url: "/profile",
     views: {
       'menuContent': {
-        templateUrl: "templates/profile.html"
-        // controller:
+        templateUrl: "templates/profile.html",
+        controller: "ProfileCtrl"
       }
     }
   })
@@ -51,8 +51,8 @@ angular.module('gearheads', ['ionic', 'gearheads.controllers'])
     url: "/items",
     views: {
       'menuContent': {
-        templateUrl: "templates/items.html"
-        // controller:
+        templateUrl: "templates/items.html",
+        controller: "ItemsCtrl"
       }
     }
   })
@@ -60,8 +60,8 @@ angular.module('gearheads', ['ionic', 'gearheads.controllers'])
     url: "/friends",
     views: {
       'menuContent': {
-        templateUrl: "templates/friends.html"
-        // conroller:
+        templateUrl: "templates/friends.html",
+        conroller: "FriendsCtrl"
       }
     }
   })
@@ -69,8 +69,26 @@ angular.module('gearheads', ['ionic', 'gearheads.controllers'])
     url: "/feed",
     views: {
       'menuContent': {
-        templateUrl: "templates/feed.html"
-        // controller:
+        templateUrl: "templates/feed.html",
+        controller: "FeedCtrl"
+      }
+    }
+  })
+  .state('app.item', {
+    url: "/item/:ASIN",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/item.html",
+        controller: "ItemCtrl"
+      }
+    }
+  })
+  .state('app.categories', {
+    url: "/categories",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/categories.html",
+        controller: "CategoriesCtrl"
       }
     }
   })
