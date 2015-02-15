@@ -10,7 +10,7 @@ var user = User.get({userId:123}, function() {
 */
 
 .factory('Search', function ($resource) {
-  return $resource('/search/:keywords');
+  return $resource('/search/:category/:keywords');
 })
 
 .factory('Lookup', function($resource) {

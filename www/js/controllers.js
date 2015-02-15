@@ -44,21 +44,24 @@ var user = User.get({userId:123}, function() {
 
 
 // TODO: persist search in querystring
-.controller('SearchCtrl', function($scope, $location, Search) {
-  console.log($location.absUrl());
+.controller('SearchCtrl', function($scope, $state, $location, Search) {
   $scope.submitKeywords = function(keywords) {
-    $scope.items = Search.get({keywords: keywords})
-  };
+    // console.log('keywords: ', keywords);
+    $state.go('app.search', {category: $location.search().category, keywords: keywords});
+  }
+
+  if ($location.search().keywords) {
+    $scope.items = Search.get({keywords: $location.search().keywords, category: $location.search().category})
+    console.log($scope.items);
+  }
 })
 
 .controller('ItemCtrl', function($scope, $stateParams, Lookup) {
   $scope.item = Lookup.get({ASIN: $stateParams.ASIN});
-  console.log($scope.item);
 })
 
 .controller('CategoriesCtrl', function($scope, $stateParams, Categories) {
   $scope.categories = Categories.get();
-  console.log($scope.categories);
 })
 
 .controller('FeedCtrl', function($scope) {

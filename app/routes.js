@@ -11,14 +11,12 @@ var Users = require('./models/Users');
 
 module.exports = function(app) {
   // API Details: http://docs.aws.amazon.com/AWSECommerceService/latest/DG/ItemSearch.html
-  app.get('/search/:keywords', function(req, res) {
-    console.log('url: ', req.url);
-    console.log('query: ', req.query);
-    console.log('body: ', req.body);
+  app.get('/search/:category/:keywords', function(req, res) {
     AWS.execute('ItemSearch',
       {
-        'SearchIndex': 'MusicalInstruments',
-        'Keywords': req.params.keywords
+        'SearchIndex': req.params.category,
+        'Keywords': req.params.keywords,
+        'ResponseGroup': 'Small,Images'
       }, function(err, results) {
         if (err) {
           throw (err);

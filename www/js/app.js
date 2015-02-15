@@ -30,7 +30,7 @@ angular.module('gearheads', ['ionic', 'gearheads.controllers', 'gearheads.servic
     controller: 'AppCtrl'
   })
   .state('app.search', {
-    url: "/search",
+    url: "/search?category&keywords",
     views: {
       'menuContent': {
         templateUrl: "templates/search.html",

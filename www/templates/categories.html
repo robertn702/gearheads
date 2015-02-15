@@ -9,7 +9,7 @@
           Submit
         </button>
       </div>
-      <ion-item ng-repeat="category in categories.categories" ng-href="">
+      <ion-item ng-repeat="category in categories.categories" ng-href="#/app/search?category={{category.searchIndex}}">
         {{category.searchIndex}}
       </ion-item>
     </ion-list>
