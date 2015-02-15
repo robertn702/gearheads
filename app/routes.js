@@ -11,19 +11,20 @@ var Users = require('./models/Users');
 
 module.exports = function(app) {
   // API Details: http://docs.aws.amazon.com/AWSECommerceService/latest/DG/ItemSearch.html
-  app.get('/search', function(req, res) {
+  app.get('/search/:keywords', function(req, res) {
     console.log('url: ', req.url);
     console.log('query: ', req.query);
     console.log('body: ', req.body);
     AWS.execute('ItemSearch',
       {
         'SearchIndex': 'MusicalInstruments',
-        'Keywords': 'macbook pro'
+        'Keywords': req.params.keywords
       }, function(err, results) {
         if (err) {
           throw (err);
         } else {
           res.json(results.ItemSearchResponse.Items[0]);
+          res.status(200);
         }
       })
   });
@@ -38,37 +39,19 @@ module.exports = function(app) {
           throw (err);
         } else {
           res.json(results.ItemLookupResponse.Items[0])
+          res.status(200);
         }
       })
   });
 
   app.get('/categories', function(req, res) {
-    Categories.findOne({SearchIndex: "All"}, function(err, category) {
-      console.log('category: ', category);
-    });
     Categories.find(function(err, categories) {
       if (err) {
         throw (err);
       } else {
-        // console.log('parsed JSON: ', JSON(categories));
-        console.log('categories: ', {categories: categories});
         res.json({categories: categories});
         res.status(200);
       }
     });
   });
-
-  // app.post('/categories', function(req, res) {
-  //   new Categories({
-  //     searchIndex: "testSearchIndex",
-  //     subCategories: "testSubCategory"
-  //   }).save(function(err, category) {
-  //     if (err) {
-  //       throw (err)
-  //     } else {
-  //       console.log('saved category in DB');
-  //     }
-  //   })
-  // });
-
 }

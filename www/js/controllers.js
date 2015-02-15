@@ -42,10 +42,13 @@ var user = User.get({userId:123}, function() {
 });
 */
 
+
+// TODO: persist search in querystring
 .controller('SearchCtrl', function($scope, $location, Search) {
   console.log($location.absUrl());
-  console.log(Search.get());
-  $scope.items = Search.get();
+  $scope.submitKeywords = function(keywords) {
+    $scope.items = Search.get({keywords: keywords})
+  };
 })
 
 .controller('ItemCtrl', function($scope, $stateParams, Lookup) {
