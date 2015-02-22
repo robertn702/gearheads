@@ -52,4 +52,16 @@ module.exports = function(app) {
       }
     });
   });
+
+  // app.get('/user', function(req, res) {
+  //   openFB.api({
+  //     path: '/me',
+  //     success: function(userInfo) {
+  //       console.log('userInfo: ', userInfo);
+  //     },
+  //     error: function(error) {
+  //       alert('Facebook error: ' + error.error_description);
+  //     }
+  //   })
+  // });
 }

@@ -21,6 +21,9 @@ angular.module('gearheads', ['ionic', 'gearheads.controllers', 'gearheads.servic
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
+  // CHANGE OUT LATER
+  openFB.init({appId: '951912891527107'});
+
   $stateProvider
 
   .state('app', {
