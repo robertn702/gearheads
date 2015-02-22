@@ -9,16 +9,12 @@
           Submit
         </button>
       </div>
-
       <div class="list">
         <a class="item item-thumbnail-left" ng-repeat="item in items.Item" href="#/app/item/{{item.ASIN[0]}}">
           <img src="{{item.ImageSets[0].ImageSet[0].ThumbnailImage[0].URL[0]}}">
           <h2>{{item.ItemAttributes[0].Title[0]}}</h2>
         </a>
       </div>
-<!--       <ion-item ng-repeat="item in items.Item" ng-href="#/app/item/{{item.ASIN[0]}}">
-        {{item.ItemAttributes[0].Title[0]}}
-      </ion-item> -->
     </ion-list>
   </ion-content>
 </ion-view>
