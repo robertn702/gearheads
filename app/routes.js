@@ -82,7 +82,7 @@ module.exports = function(app) {
       if (err) {
         throw err
       } else {
-        res.json(user.friends);
+        res.json({friends: user.friends});
       }
     });
   });

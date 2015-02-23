@@ -1,5 +1,5 @@
 <ion-view view-title="Profile">
-  <ion-content class="has-header">
+  <ion-content class="has-header has-footer">
     <div class="list card">
       <div class="item">
         <h2>{{user.name}}</h2>
@@ -9,4 +9,11 @@
       </div>
     </div>
   </ion-content>
+  <div class="bar bar-footer">
+    <div class="bar-footer button-bar">
+      <a ng-href="#/app/items" class="button">Items</a>
+      <a ng-href="#/app/friends" class="button">Friends</a>
+      <a ng-href="#/app/groups" class="button">Groups</a>
+    </div>
+  </div>
 </ion-view>
