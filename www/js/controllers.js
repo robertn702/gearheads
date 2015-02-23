@@ -118,6 +118,7 @@ var user = User.get({userId:123}, function() {
 })
 
 .controller('CategoriesCtrl', function($scope, $stateParams, Categories) {
+  $scope.categoryInput = '';
   $scope.categories = Categories.get();
   console.log('categories: ', $scope.categories);
 })
