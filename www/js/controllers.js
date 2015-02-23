@@ -3,7 +3,6 @@ angular.module('gearheads.controllers', [])
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, User) {
   // Form data for the login modal
   $scope.loginData = {};
-  console.log('AppCtrl User.user: ', User.user);
 
   // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/login.html', {
@@ -20,7 +19,6 @@ angular.module('gearheads.controllers', [])
 
   // Open the login modal
   $scope.login = function() {
-    console.log($scope.modal);
     $scope.modal.show();
   };
 
@@ -49,7 +47,7 @@ angular.module('gearheads.controllers', [])
   // Automatically checks the login status and opens the login modal if user not logged in
   var loginStatus = function() {
       openFB.getLoginStatus(function(loginStatus) {
-      console.log('is logged out: ', loginStatus.status !== 'connected');
+      console.log('logged in: ', loginStatus.status === 'connected');
       // console.log('User.user: ', User.user);
       if (loginStatus.status === 'connected') {
         User.getUser();
@@ -98,27 +96,47 @@ var user = User.get({userId:123}, function() {
   }
 })
 
-.controller('ItemCtrl', function($scope, $stateParams, Lookup) {
+.controller('ItemCtrl', function($scope, $stateParams, $http, Lookup, User) {
   $scope.item = Lookup.get({ASIN: $stateParams.ASIN});
-  console.log($scope.item);
+  console.log('item: ', $scope.item);
+
+  $scope.add = function() {
+    console.log('User.user: ', User.user);
+    $http.post("/item/" + User.user.data.id, $scope.item).
+      success(function(data, status, headers, config) {
+        console.log('added item');
+      }).
+      error(function(data, status, headers, config) {
+        console.log('error adding item');
+      });
+  };
 })
 
 .controller('ProfileCtrl', function($scope, User) {
   $scope.user = User.user.data;
+  console.log('user: ', $scope.user);
 })
 
 .controller('CategoriesCtrl', function($scope, $stateParams, Categories) {
   $scope.categories = Categories.get();
+  console.log('categories: ', $scope.categories);
 })
 
-.controller('FriendsCtrl', function($scope) {
+.controller('FriendsCtrl', function($scope, User, Friends) {
+  $scope.friends = Friends.get({ id: User.user.data.id });
+  console.log('friends: ', $scope.friends);
+})
 
+.controller('GroupsCtrl', function($scope, User, Groups) {
+  $scope.groups = Groups.get({ id: User.user.data.id });
+  console.log('groups: ', $scope.groups);
 })
 
 .controller('FeedCtrl', function($scope) {
 
 })
 
-.controller('ItemsCtrl', function($scope) {
-
+.controller('ItemsCtrl', function($scope, User, Items) {
+  $scope.items = Items.get({ id: User.user.data.id });
+  console.log('items: ', $scope.items);
 })

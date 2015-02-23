@@ -64,7 +64,7 @@ angular.module('gearheads', ['ionic', 'gearheads.controllers', 'gearheads.servic
     views: {
       'menuContent': {
         templateUrl: "templates/friends.html",
-        conroller: "FriendsCtrl"
+        controller: "FriendsCtrl"
       }
     }
   })
@@ -95,15 +95,15 @@ angular.module('gearheads', ['ionic', 'gearheads.controllers', 'gearheads.servic
       }
     }
   })
-  // .state('app.single', {
-  //   url: "/playlists/:playlistId",
-  //   views: {
-  //     'menuContent': {
-  //       templateUrl: "templates/playlist.html",
-  //       controller: 'PlaylistCtrl'
-  //     }
-  //   }
-  // });
+  .state('app.groups', {
+    url: "/groups",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/groups.html",
+        controller: 'GroupsCtrl'
+      }
+    }
+  });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/feed');
 });

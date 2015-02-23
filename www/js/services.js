@@ -18,7 +18,7 @@ var user = User.get({userId:123}, function() {
 })
 
 .factory('Friends', function($resource) {
-  return $resource('/friends');
+  return $resource('/friends/:id');
 })
 
 .factory('Comments', function($resource) {
@@ -30,10 +30,14 @@ var user = User.get({userId:123}, function() {
 })
 
 .factory('Items', function($resource) {
-  return $resource('/items');
+  return $resource('/items/:id');
 })
 
-.factory('User', function() {
+.factory('Groups', function($resource) {
+  return $resource('/groups');
+})
+
+.factory('User', function($http) {
   var user = {};
 
   var getUser = function() {
@@ -41,7 +45,13 @@ var user = User.get({userId:123}, function() {
       path: '/me',
       success: function(userData) {
         user.data = userData;
-        console.log('user: ', user);
+        $http.post('/user', userData).
+        success(function(data, status, headers, config) {
+          console.log('checking for newuser');
+        }).
+        error(function(data, status, headers, config) {
+
+        })
       },
       error: function(error) {
         alert('Facebook error: ' + error.error_description);

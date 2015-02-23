@@ -53,15 +53,101 @@ module.exports = function(app) {
     });
   });
 
-  // app.get('/user', function(req, res) {
-  //   openFB.api({
-  //     path: '/me',
-  //     success: function(userInfo) {
-  //       console.log('userInfo: ', userInfo);
-  //     },
-  //     error: function(error) {
-  //       alert('Facebook error: ' + error.error_description);
-  //     }
-  //   })
-  // });
+  app.post('/user', function(req, res) {
+    Users.findOne({ 'facebookId': req.body.id }, function(err, user) {
+      if (err) {
+        throw err;
+      } else if (user) {
+        console.log('user exists');
+      } else {
+        new Users({
+          first_name: req.body.first_name,
+          last_name: req.body.last_name,
+          name: req.body.name,
+          facebookId: req.body.id
+        }).save(function(err, user) {
+          if (err) {
+            throw err;
+          } else {
+            console.log('created user');
+            res.json(user);
+          }
+        });
+      }
+    })
+  });
+
+  app.get('/friends/:id', function(req, res) {
+    Users.findOne({ 'facebookId': req.params.id }, function(err, user) {
+      if (err) {
+        throw err
+      } else {
+        res.json(user.friends);
+      }
+    });
+  });
+
+  app.get('/items/:id', function(req, res) {
+    Users.findOne({ 'facebookId': req.params.id }, function(err, user) {
+      if (err) {
+        throw err
+      } else {
+        // res.json(user);
+        res.json({items: user.items});
+      }
+    })
+  });
+
+  app.get('/groups/:id', function(req, res) {
+    Users.findOne({ 'facebookId': req.params.id }, function(err, user) {
+      if (err) {
+        throw err
+      } else {
+        res.json(user.groups);
+      }
+    })
+  });
+
+  app.post('/item/:id', function(req, res) {
+
+    // TODO Fix Query!!!
+    Users.findOne(
+      {
+        // query to find if user has item
+        'facebookId': req.params.id,
+        'items.id': req.body.Item[0].ASIN[0]
+        // 'items': { $in: [ { id: req.body.Item[0].ASIN[0] } ] }
+        // 'items.id': { $in: [ req.body.Item[0].ASIN[0] ] }
+      }, function(err, user) {
+        if (err) {
+          throw err;
+        } else if (user) {
+          // returns user
+          console.log('aready added item')
+        } else {
+          // insert item into user's item list
+
+          Users.update(
+            { 'facebookId': req.params.id },
+            { $addToSet: { 'items':
+                {
+                  'id': req.body.Item[0].ASIN[0],
+                  'name': req.body.Item[0].ItemAttributes[0].Title[0],
+                  'category': req.body.Item[0].ItemAttributes[0].ProductGroup[0],
+                  'image': req.body.Item[0].ImageSets[0].ImageSet[0].ThumbnailImage[0].URL[0]
+                }
+            } },
+            function(err, user) {
+              if (err) {
+                throw err;
+              } else {
+                console.log('added item');
+              }
+            }
+          )
+
+        }
+      })
+  });
+
 }
