@@ -126,7 +126,6 @@ module.exports = function(app) {
           console.log('aready added item')
         } else {
           // insert item into user's item list
-
           Users.update(
             { 'facebookId': req.params.id },
             { $addToSet: { 'items':
@@ -134,7 +133,7 @@ module.exports = function(app) {
                   'id': req.body.Item[0].ASIN[0],
                   'name': req.body.Item[0].ItemAttributes[0].Title[0],
                   'category': req.body.Item[0].ItemAttributes[0].ProductGroup[0],
-                  'image': req.body.Item[0].ImageSets[0].ImageSet[0].ThumbnailImage[0].URL[0]
+                  'image': req.body.Item[0].ImageSets[0].ImageSet[0].MediumImage[0].URL[0]
                 }
             } },
             function(err, user) {
@@ -149,5 +148,4 @@ module.exports = function(app) {
         }
       })
   });
-
 }

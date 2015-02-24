@@ -18,26 +18,33 @@
     </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item nav-clear menu-close ng-click="logout()">
-          Logout
-        </ion-item>
-        <ion-item nav-clear menu-close href="#/app/feed">
+        <ion-item class="item item-icon-left" nav-clear menu-close href="#/app/feed">
+          <i class="icon ion-social-rss"></i>
           Feed
         </ion-item>
-        <ion-item nav-clear menu-close href="#/app/profile">
+        <ion-item class="item item-icon-left" nav-clear menu-close href="#/app/profile">
+          <i class="icon ion-person"></i>
           Profile
         </ion-item>
-        <ion-item nav-clear menu-close href="#/app/items">
-          Items
+        <ion-item class="item item-icon-left" nav-clear menu-close href="#/app/items">
+          <i class="icon ion-briefcase"></i>
+          Gear
         </ion-item>
-        <ion-item nav-clear menu-close href="#/app/groups">
+        <ion-item class="item item-icon-left" nav-clear menu-close href="#/app/groups">
+          <i class="icon ion-coffee"></i>
           Groups
         </ion-item>
-        <ion-item nav-clear menu-close href="#/app/friends">
+        <ion-item class="item item-icon-left" nav-clear menu-close href="#/app/friends">
+          <i class="icon ion-person-stalker"></i>
           Friends
         </ion-item>
-        <ion-item nav-clear menu-close href="#/app/categories">
-          Search
+        <ion-item class="item item-icon-left" nav-clear menu-close href="#/app/categories">
+          <i class="icon ion-plus-circled"></i>
+          Add Gear
+        </ion-item>
+        <ion-item class="item item-icon-left" nav-clear menu-close ng-click="logout()">
+          <i class="icon ion-log-out"></i>
+          Logout
         </ion-item>
       </ion-list>
     </ion-content>

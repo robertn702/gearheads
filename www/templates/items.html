@@ -1,10 +1,21 @@
 <ion-view view-title="Items">
-  <ion-content>
-    <div class="list">
-      <a class="item item-thumbnail-left" ng-repeat="item in items.items" href="#/app/item/{{item.id}}">
-        <img src="{{item.image}}">
+  <ion-content class="has-header has-footer">
+    <div class="list card" ng-repeat="item in items.items">
+      <div class="item">
         <h2>{{item.name}}</h2>
-      </a>
+      </div>
+
+      <div class="item item-image">
+        <a href="#/app/item/{{item.id}}"><img src="{{item.image}}"></a>
+      </div>
     </div>
   </ion-content>
+  <div class="bar bar-footer">
+    <div class="tabs tabs-icon-left">
+      <a href="#/app/categories" class="tab-item">
+        <i class="icon ion-plus-circled"></i>
+        Add Gear
+      </a>
+    </div>
+  </div>
 </ion-view>

@@ -5,6 +5,11 @@ var usersSchema = new mongoose.Schema({
   last_name: String,
   name: String,
   facebookId: String,
+  location: {
+    state: String,
+    city: String,
+    zip_code: String
+  },
   date: { type: Date, default: Date.now },
   items: [{
     id: String,

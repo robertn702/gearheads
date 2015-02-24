@@ -134,7 +134,8 @@ var user = User.get({userId:123}, function() {
 })
 
 .controller('FeedCtrl', function($scope) {
-
+  // $scope.feed = Feed.get({});
+  console.log('feed: ', $scope.feed);
 })
 
 .controller('ItemsCtrl', function($scope, User, Items) {

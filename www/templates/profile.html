@@ -1,19 +1,36 @@
 <ion-view view-title="Profile">
   <ion-content class="has-header has-footer">
     <div class="list card">
-      <div class="item">
+      <div class="item item-avatar">
+        <img src="http://graph.facebook.com/{{user.id}}/picture?width=150&height=150" alt="{{user.name}}">
         <h2>{{user.name}}</h2>
+        <p>{{user.location}}</p>
+      </div>
+      <div class="item item-image">
+        <img src="http://graph.facebook.com/{{user.id}}/picture?width=300&height=300"/>
+      </div>
+      <div class="item item-divider">
+        <h2>About</h2>
       </div>
       <div class="item item-body">
-        <img src="http://graph.facebook.com/{{user.id}}/picture?width=270&height=270"/>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ac tristique orci. Suspendisse pellentesque ante metus. Donec eget ex non massa feugiat pretium condimentum nec mi. Sed quis neque id magna imperdiet dictum quis non mauris. Morbi fermentum turpis in sagittis blandit. Morbi suscipit elit ac justo lobortis, ut interdum ante lobortis. Quisque at enim eget ligula interdum sagittis at id mauris. Quisque ornare massa quam. Etiam nisl nisl, volutpat vitae suscipit efficitur, aliquam in mauris.</p>
       </div>
     </div>
   </ion-content>
   <div class="bar bar-footer">
-    <div class="bar-footer button-bar">
-      <a ng-href="#/app/items" class="button">Items</a>
-      <a ng-href="#/app/friends" class="button">Friends</a>
-      <a ng-href="#/app/groups" class="button">Groups</a>
+    <div class="tabs tabs-icon-top">
+      <a href="#/app/items" class="tab-item">
+        <i class="icon ion-briefcase"></i>
+        Gear
+      </a>
+      <a href="#/app/friends" class="tab-item">
+        <i class="icon ion-person-stalker"></i>
+        Friends
+      </a>
+      <a href="#/app/groups" class="tab-item">
+        <i class="icon ion-coffee"></i>
+        Groups
+      </a>
     </div>
   </div>
 </ion-view>
