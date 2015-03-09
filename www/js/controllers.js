@@ -96,7 +96,7 @@ var user = User.get({userId:123}, function() {
   }
 })
 
-.controller('ItemCtrl', function($scope, $stateParams, $http, Lookup, User) {
+.controller('ItemCtrl', function($scope, $state, $stateParams, $http, Lookup, User) {
   $scope.item = Lookup.get({ASIN: $stateParams.ASIN});
   console.log('item: ', $scope.item);
 
@@ -105,6 +105,7 @@ var user = User.get({userId:123}, function() {
     $http.post("/item/" + User.user.data.id, $scope.item).
       success(function(data, status, headers, config) {
         console.log('added item');
+        $state.go('#/app/items')
       }).
       error(function(data, status, headers, config) {
         console.log('error adding item');
@@ -113,6 +114,7 @@ var user = User.get({userId:123}, function() {
 })
 
 .controller('ProfileCtrl', function($scope, User) {
+  console.log('load ProfileCtrl');
   $scope.user = User.user.data;
   console.log('user: ', $scope.user);
 })
@@ -135,7 +137,12 @@ var user = User.get({userId:123}, function() {
 
 .controller('FeedCtrl', function($scope) {
   // $scope.feed = Feed.get({});
-  console.log('feed: ', $scope.feed);
+  // console.log('feed: ', $scope.feed);
+})
+
+.controller('UsersCtrl', function($scope, Users) {
+  $scope.users = Users.get();
+  console.log('users: ', $scope.users);
 })
 
 .controller('ItemsCtrl', function($scope, User, Items) {

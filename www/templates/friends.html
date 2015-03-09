@@ -6,13 +6,19 @@
           <input type="text" placeholder="Filter Friends">
         </label>
       </div>
-      <ion-item>
-      </ion-item>
+      <div class="list">
+        <a href="" class="item list-avatar">
+          <img src="http://graph.facebook.com/{{friend.id}}/picture?width=150&height=150" alt="{{friend.name}}">
+          <h2>{{friend.name}}</h2>
+          <p>{{friend.location}}</p>
+        </a>
+
+      </div>
     </ion-list>
   </ion-content>
   <div class="bar bar-footer">
     <div class="tabs tabs-icon-left">
-      <a href="#/app/" class="tab-item">
+      <a href="#/app/users" class="tab-item">
         <i class="icon ion-person-add"></i>
         Add Friends
       </a>

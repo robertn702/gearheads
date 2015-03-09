@@ -108,6 +108,16 @@ module.exports = function(app) {
     })
   });
 
+  app.get('/users', function(req, res) {
+    Users.find(function(err, users) {
+      if (err) {
+        throw err;
+      } else {
+        res.json({users: users});
+      }
+    });
+  });
+
   app.post('/item/:id', function(req, res) {
 
     // TODO Fix Query!!!
@@ -133,7 +143,7 @@ module.exports = function(app) {
                   'id': req.body.Item[0].ASIN[0],
                   'name': req.body.Item[0].ItemAttributes[0].Title[0],
                   'category': req.body.Item[0].ItemAttributes[0].ProductGroup[0],
-                  'image': req.body.Item[0].ImageSets[0].ImageSet[0].MediumImage[0].URL[0]
+                  'image': req.body.Item[0].ImageSets[0].ImageSet[0].LargeImage[0].URL[0]
                 }
             } },
             function(err, user) {

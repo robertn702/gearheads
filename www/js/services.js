@@ -64,3 +64,7 @@ var user = User.get({userId:123}, function() {
     getUser: getUser
   };
 })
+
+.factory('Users', function($resource) {
+  return $resource('/users');
+})

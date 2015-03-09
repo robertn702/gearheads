@@ -43,6 +43,7 @@ angular.module('gearheads', ['ionic', 'gearheads.controllers', 'gearheads.servic
   })
   .state('app.profile', {
     url: "/profile",
+    controller: "ProfileCtrl",
     views: {
       'menuContent': {
         templateUrl: "templates/profile.html",
@@ -101,6 +102,15 @@ angular.module('gearheads', ['ionic', 'gearheads.controllers', 'gearheads.servic
       'menuContent': {
         templateUrl: "templates/groups.html",
         controller: 'GroupsCtrl'
+      }
+    }
+  })
+  .state('app.users', {
+    url: "/users",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/users.html",
+        controller: 'UsersCtrl'
       }
     }
   });
